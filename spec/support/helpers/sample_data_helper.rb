@@ -1,6 +1,23 @@
 require "json"
 
 module SampleDataHelper
+  def timeout_image(url, uid)
+    error_image(url, uid, "Image Retrieve Timeout")
+  end
+
+  def invalid_image(url, uid)
+    error_image(url, uid, "Invalid image")
+  end
+
+  def error_image(url, uid, status)
+    {
+      status: "Invalid image",
+      url: url,
+      uid: uid,
+      data: {}
+    }.to_json
+  end
+
   def blank_image(url, uid)
     {
       status: "OK",

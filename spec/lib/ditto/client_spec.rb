@@ -10,12 +10,30 @@ RSpec.describe Ditto::Client do
   describe "#find" do
     let(:url) { "http://www.example.com/foo.jpg" }
     let(:image_id) { "1234" }
+    let(:response) { ok_response(response_body) }
 
     subject(:image) { client.find(url, image_id) }
 
     before(:each) do
-      expect(Net::HTTP).to receive(:get_response)
-        .and_return(ok_response(response_body))
+      expect(Net::HTTP).to receive(:get_response).and_return(response)
+    end
+
+    context "when an image is invalid" do
+      let(:response) { invalid_response(invalid_image(url, image_id)) }
+
+      it "raises an error" do
+        expect { client.find(url, image_id) }.to(
+          raise_error(Ditto::InvalidImageError))
+      end
+    end
+
+    context "when an image times out" do
+      let(:response) { timeout_response(timeout_image(url, image_id)) }
+
+      it "raises an error" do
+        expect { client.find(url, image_id) }.to(
+          raise_error(Ditto::ImageTimeoutError))
+      end
     end
 
     context "when an image has no matches" do

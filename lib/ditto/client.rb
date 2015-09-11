@@ -9,8 +9,13 @@ module Ditto
     def find(url, id)
       response = Net::HTTP.get_response(find_uri(url, id))
 
-      if response.code == "200"
+      case response.code
+      when "200"
         Image.new(JSON.parse(response.body, symbolize_names: true))
+      when "408"
+        raise ImageTimeoutError
+      when "415"
+        raise InvalidImageError
       end
     end
 
