@@ -23,11 +23,11 @@ module Ditto
     end
 
     def faces
-      data[:faces].map { |face| Face.new(face) }
+      faces_array.map { |face| Face.new(face) }
     end
 
     def moods
-      data[:moods].map { |mood| Mood.new(mood) }
+      moods_array.map { |mood| Mood.new(mood) }
     end
 
     def logos
@@ -38,6 +38,14 @@ module Ditto
 
     def data
       response[:data]
+    end
+
+    def faces_array
+      data[:faces] || []
+    end
+
+    def moods_array
+      data[:moods] || []
     end
   end
 end

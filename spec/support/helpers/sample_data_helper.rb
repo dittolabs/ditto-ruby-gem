@@ -1,6 +1,19 @@
 require "json"
 
 module SampleDataHelper
+  def blank_image(url, uid)
+    {
+      status: "OK",
+      url: url,
+      uid: uid,
+      data: {
+        image_width: 800,
+        image_height: 640,
+        matches: []
+      },
+    }.to_json
+  end
+
   def sample_image(url, uid)
     {
       status: "OK",

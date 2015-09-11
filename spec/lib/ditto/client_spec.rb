@@ -11,15 +11,25 @@ RSpec.describe Ditto::Client do
     let(:url) { "http://www.example.com/foo.jpg" }
     let(:image_id) { "1234" }
 
-    context "when successfully processing an image" do
+    subject(:image) { client.find(url, image_id) }
+
+    before(:each) do
+      expect(Net::HTTP).to receive(:get_response)
+        .and_return(ok_response(response_body))
+    end
+
+    context "when an image has no matches" do
+      let(:response_body) { blank_image(url, image_id) }
+
+      it { is_expected.to have_attributes(url: url, image_id: image_id) }
+      it { is_expected.to have_attributes(width: 800, height: 640) }
+      it { expect(image.faces).to be_empty }
+      it { expect(image.moods).to be_empty }
+      it { expect(image.logos).to be_empty }
+    end
+
+    context "when an image has logos and faces" do
       let(:response_body) { sample_image(url, image_id) }
-
-      before(:each) do
-        expect(Net::HTTP).to receive(:get_response)
-          .and_return(ok_response(response_body))
-      end
-
-      subject(:image) { client.find(url, image_id) }
 
       it { is_expected.to have_attributes(url: url, image_id: image_id) }
       it { is_expected.to have_attributes(width: 800, height: 640) }
