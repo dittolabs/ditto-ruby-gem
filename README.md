@@ -2,6 +2,7 @@
 
 [![Build Status](https://travis-ci.org/dittolabs/ditto-ruby-gem.svg?branch=travis-ci)](https://travis-ci.org/dittolabs/ditto-ruby-gem)
 [![Code Climate](https://codeclimate.com/github/dittolabs/ditto-ruby-gem/badges/gpa.svg)](https://codeclimate.com/github/dittolabs/ditto-ruby-gem)
+[![Coverage Status](https://coveralls.io/repos/dittolabs/ditto-ruby-gem/badge.svg?branch=master&service=github)](https://coveralls.io/github/dittolabs/ditto-ruby-gem?branch=master)
 
 A Ruby wrapper for the Ditto Labs Photo Reader API.
 
