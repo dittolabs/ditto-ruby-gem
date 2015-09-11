@@ -1,5 +1,7 @@
 # Ditto Labs Ruby Gem
 
+[![Build Status](https://travis-ci.org/dittolabs/ditto-ruby-gem.svg?branch=travis-ci)](https://travis-ci.org/dittolabs/ditto-ruby-gem)
+
 A Ruby wrapper for the Ditto Labs Photo Reader API.
 
 ## Installation
