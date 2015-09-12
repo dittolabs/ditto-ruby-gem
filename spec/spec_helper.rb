@@ -1,3 +1,6 @@
+require "coveralls"
+Coveralls.wear!
+
 require "support/helpers/response_helper"
 require "support/helpers/sample_data_helper"
 
