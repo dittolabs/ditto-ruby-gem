@@ -6,10 +6,10 @@ RSpec.describe Ditto::Client do
 
   let(:client_id) { "abc123" }
   let(:client) { Ditto::Client.new(client_id) }
+  let(:url) { "http://www.example.com/foo.jpg" }
+  let(:image_id) { "1234" }
 
   describe "#find" do
-    let(:url) { "http://www.example.com/foo.jpg" }
-    let(:image_id) { "1234" }
     let(:response) { ok_response(response_body) }
 
     subject(:image) { client.find(url, image_id) }
@@ -72,6 +72,16 @@ RSpec.describe Ditto::Client do
             an_object_having_attributes(
               brand: "Boston_Red_Sox", confidence: "Medium")))
       end
+    end
+  end
+
+  describe "#find_raw" do
+    it "returns the response code and body without parsing" do
+      response_body = sample_image(url, image_id)
+      response = ok_response(response_body)
+      expect(Net::HTTP).to receive(:get_response).and_return(response)
+
+      expect(client.find_raw(url, image_id)).to eq(["200", response_body])
     end
   end
 

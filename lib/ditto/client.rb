@@ -7,16 +7,21 @@ module Ditto
     end
 
     def find(url, id)
-      response = Net::HTTP.get_response(find_uri(url, id))
+      code, body = find_raw(url, id)
 
-      case response.code
+      case code
       when "200"
-        Image.new(JSON.parse(response.body, symbolize_names: true))
+        Image.new(JSON.parse(body, symbolize_names: true))
       when "408"
         raise ImageTimeoutError
       when "415"
         raise InvalidImageError
       end
+    end
+
+    def find_raw(url, id)
+      response = Net::HTTP.get_response(find_uri(url, id))
+      [response.code, response.body]
     end
 
     def find_uri(url, id)
