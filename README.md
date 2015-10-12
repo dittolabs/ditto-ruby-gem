@@ -26,7 +26,7 @@ The Photo Reader API allows you to process images using Ditto's image recognitio
 require "ditto"
 
 client = Ditto::Client.new(ENV["DITTO_CLIENT_ID"])
-image = api.find("http://www.example.com/foo.png", "sample_id")
+image = client.find("http://www.example.com/foo.png", "sample_id")
 ```
 
 Any faces, smiles, or logos found in the image can be accessed with the `image.faces`, `image.moods`, or `image.logos` methods, respectively.
