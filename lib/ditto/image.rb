@@ -22,6 +22,10 @@ module Ditto
       data[:image_height]
     end
 
+    def label_confidence_threshold
+      attributes[:confidence_threshold]
+    end
+
     def faces
       faces_array.map { |face| Face.new(face) }
     end
@@ -32,6 +36,10 @@ module Ditto
 
     def logos
       data[:matches].map { |logo| Logo.new(logo) }
+    end
+
+    def labels
+      labels_array.map { |label| Label.new(label) }
     end
 
     private
@@ -46,6 +54,14 @@ module Ditto
 
     def moods_array
       data[:moods] || []
+    end
+
+    def attributes
+      data[:attributes] || {}
+    end
+
+    def labels_array
+      data[:attributes].nil? ? [] : data[:attributes][:labels]
     end
   end
 end
