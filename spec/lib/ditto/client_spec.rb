@@ -44,9 +44,10 @@ RSpec.describe Ditto::Client do
       it { expect(image.faces).to be_empty }
       it { expect(image.moods).to be_empty }
       it { expect(image.logos).to be_empty }
+      it { expect(image.labels).to be_empty }
     end
 
-    context "when an image has logos and faces" do
+    context "when an image has logos and faces and labels" do
       let(:response_body) { sample_image(url, image_id) }
 
       it { is_expected.to have_attributes(url: url, image_id: image_id) }
@@ -71,6 +72,16 @@ RSpec.describe Ditto::Client do
               brand: "Coca_Cola", confidence: "High"),
             an_object_having_attributes(
               brand: "Boston_Red_Sox", confidence: "Medium")))
+      end
+
+      it "has any labels detected" do
+        expect(image.labels).to(contain_exactly(
+          an_object_having_attributes(
+            label: "coffee cup", confidence: 0.91216)))
+      end
+
+      it "has a confidence threshold" do
+        expect(image.label_confidence_threshold).to eq(0.5)
       end
     end
   end

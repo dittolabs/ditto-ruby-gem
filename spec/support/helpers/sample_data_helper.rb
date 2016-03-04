@@ -74,6 +74,16 @@ module SampleDataHelper
             match_quality: "Medium"
           }
         ],
+        attributes: {
+          labels: [
+            {
+              id: 1049,
+              label: "coffee cup",
+              confidence: 0.91216,
+            }
+          ],
+          confidence_threshold: 0.5
+        },
         image_height: 640,
         image_width: 800
       },
