@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    ditto_api (0.0.2)
+    ditto_api (0.1.0)
 
 GEM
   remote: https://rubygems.org/
@@ -60,3 +60,6 @@ DEPENDENCIES
   ditto_api!
   rake (~> 10.0)
   rspec (~> 3.0)
+
+BUNDLED WITH
+   1.11.2

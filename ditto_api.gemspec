@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name = "ditto_api"
-  s.version = "0.0.2"
+  s.version = "0.1.0"
   s.summary = "A Ruby interface to the Ditto Photo Reader API."
   s.license = "MIT"
   s.author = "Adam Sheehan"
